@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartupForge • Startap nima? (2026)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+        
+        .hero-bg {
+            background: linear-gradient(270deg, #0a0a2a, #1a0f2e, #0f1a2e, #1a0f2e);
+            background-size: 400% 400%;
+            animation: gradientShift 25s ease infinite;
+        }
+        @keyframes gradientShift { 
+            0% { background-position: 0% 50%; } 
+            50% { background-position: 100% 50%; } 
+            100% { background-position: 0% 50%; } 
+        }
+
+        .glass {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .dark .glass { background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1); }
+
+        .card-hover { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .card-hover:hover { 
+            transform: translateY(-12px) scale(1.03); 
+            box-shadow: 0 30px 60px -15px rgb(0 212 255 / 0.25); 
+        }
+
+        .counter { font-variant-numeric: tabular-nums; font-size: 3.5rem; font-weight: 700; line-height: 1; }
+
+        .modal {
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.7) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .rocket-launch {
+            animation: rocketLaunch 2.8s ease forwards;
+        }
+        @keyframes rocketLaunch {
+            0% { transform: translateY(120px) rotate(-15deg); opacity: 0; }
+            40% { transform: translateY(-100px) rotate(10deg); }
+            100% { transform: translateY(-380px) rotate(0deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 z-50 glass border-b border-white/10 w-full">
+        <div class="max-w-screen-2xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center text-3xl">🚀</div>
+                <h1 class="title-font text-3xl font-bold tracking-tighter">StartupForge</h1>
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#projects" class="hover:text-cyan-400 transition">Loyihalar</a>
+                <a href="#videos" class="hover:text-cyan-400 transition">Videolar</a>
+                <a href="#what" class="hover:text-cyan-400 transition">Startap nima?</a>
+                <a href="#money" class="hover:text-cyan-400 transition">Daromad modellar</a>
+                <a href="#stats" class="hover:text-cyan-400 transition">Statistika</a>
+                <a href="#income" class="hover:text-cyan-400 transition">Real daromad</a>
+                <a href="#roadmap" class="hover:text-cyan-400 transition">Yo‘l xaritasi</a>
+            </div>
+
+            <button onclick="openProjectModal()" 
+                    class="px-8 py-3.5 bg-gradient-to-r from-cyan-400 to-violet-500 hover:from-cyan-500 hover:to-violet-600 text-white rounded-3xl font-semibold transition-all flex items-center gap-2">
+                <span class="text-xl">🚀</span> Loyihani joylashtirish
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="max-w-screen-2xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-6 py-3 glass rounded-3xl text-sm">
+                    <span class="animate-pulse">●</span> 2026 YANGI STARTAP PLATFORMASI
+                </div>
+                <h1 class="title-font text-7xl md:text-8xl leading-none font-bold tracking-[-3px]">Startap nima?</h1>
+                <p class="text-2xl text-zinc-300 max-w-lg">Vaqtinchalik tashkilot bo‘lib, u takrorlanadigan va tez o‘sadigan biznes modelini qidiradi — Steve Blank</p>
+                
+                <button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" 
+                        class="px-12 py-7 bg-white text-zinc-900 text-xl font-semibold rounded-3xl hover:scale-105 transition-all shadow-xl">
+                    Loyihalarni ko‘rish →
+                </button>
+            </div>
+            
+            <div class="hidden md:block text-center">
+                <div class="glass rounded-3xl p-12">
+                    <div class="text-8xl mb-8 animate-bounce">🚀</div>
+                    <h3 class="title-font text-5xl">G‘oyadan million dollarlik biznesgacha</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOYIHALAR -->
+    <section id="projects" class="py-24 bg-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="title-font text-5xl font-bold tracking-tight">Joylashtirilgan loyihalar</h2>
+                    <p class="text-zinc-400 text-xl mt-3">O‘zbekiston yosh tadbirkorlarining real g‘oyalari (2026)</p>
+                </div>
+                <button onclick="openProjectModal()" 
+                        class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-violet-500 rounded-3xl font-semibold flex items-center gap-2 hover:scale-105 transition">
+                    <span>🚀</span> Yangi loyiha qo‘shish
+                </button>
+            </div>
+
+            <div id="projectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+            <div id="noProjects" class="text-center py-20 hidden">
+                <div class="text-6xl mb-6">📭</div>
+                <p class="text-zinc-400 text-xl">Hali hech qanday loyiha joylashtirilmagan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEOLAR - 6 TA SI FATLI VIDEO -->
+    <section id="videos" class="py-24 bg-zinc-950">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-5xl">Startap haqida videolar</h2>
+                <p class="text-zinc-400 mt-3">Eng foydali va amaliy maslahatlar — boshlovchilar va tajribali tadbirkorlar uchun (2026)</p>
+            </div>
+            
+            <div id="videosContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Startap nima? -->
+    <section id="what" class="py-24">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-center">
+                <div class="md:col-span-5">
+                    <h2 class="title-font text-5xl tracking-[-1px]">Startap — oddiy kichik biznes emas</h2>
+                    <div class="mt-8 space-y-6 text-lg text-zinc-300">
+                        <p>Startap — texnologiya yordamida katta muammoni hal qilish va tez o‘sish uchun yaratilgan vaqtinchalik tashkilot.</p>
+                        <p>Oddiy biznes barqaror daromadga e’tibor qaratsa, startap <span class="text-cyan-300 font-medium">10x yoki 100x o‘sishni</span> maqsad qiladi.</p>
+                    </div>
+                </div>
+                <div class="md:col-span-7 grid grid-cols-3 gap-6">
+                    <div class="glass rounded-3xl p-8 card-hover text-center">
+                        <div class="text-6xl mb-4">🚕</div>
+                        <h4 class="font-bold">Uber</h4>
+                        <p class="text-sm text-zinc-400">Transport inqilobi</p>
+                    </div>
+                    <div class="glass rounded-3xl p-8 card-hover text-center">
+                        <div class="text-6xl mb-4">🏠</div>
+                        <h4 class="font-bold">Airbnb</h4>
+                        <p class="text-sm text-zinc-400">Mehmonxona modeli</p>
+                    </div>
+                    <div class="glass rounded-3xl p-8 card-hover text-center">
+                        <div class="text-6xl mb-4">💳</div>
+                        <h4 class="font-bold">Stripe</h4>
+                        <p class="text-sm text-zinc-400">To‘lov inqilobi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daromad modellar -->
+    <section id="money" class="py-24 bg-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <h2 class="title-font text-5xl text-center mb-16">Startaplar qanday pul ishlab topadi?</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="glass rounded-3xl p-8 card-hover text-center">
+                    <div class="text-6xl mb-6">🔄</div>
+                    <h4 class="text-2xl font-semibold">Obuna</h4>
+                    <p class="text-zinc-400">Har oy/yil to‘lov</p>
+                    <div class="mt-6 text-emerald-400 text-sm">Netflix • Spotify • Notion</div>
+                </div>
+                <div class="glass rounded-3xl p-8 card-hover text-center">
+                    <div class="text-6xl mb-6">📺</div>
+                    <h4 class="text-2xl font-semibold">Reklama</h4>
+                    <p class="text-zinc-400">Bepul + reklama</p>
+                    <div class="mt-6 text-emerald-400 text-sm">Instagram • YouTube • TikTok</div>
+                </div>
+                <div class="glass rounded-3xl p-8 card-hover text-center">
+                    <div class="text-6xl mb-6">🛒</div>
+                    <h4 class="text-2xl font-semibold">Bo‘zor (Marketplace)</h4>
+                    <p class="text-zinc-400">Har savdodan ulush</p>
+                    <div class="mt-6 text-emerald-400 text-sm">Uber • Airbnb • OLX</div>
+                </div>
+                <div class="glass rounded-3xl p-8 card-hover text-center">
+                    <div class="text-6xl mb-6">☁️</div>
+                    <h4 class="text-2xl font-semibold">SaaS</h4>
+                    <p class="text-zinc-400">Bulutli dasturiy ta’minot</p>
+                    <div class="mt-6 text-emerald-400 text-sm">Slack • Canva • Stripe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistika -->
+    <section id="stats" class="py-24">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <h2 class="title-font text-5xl text-center mb-16">Real statistika (2026)</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="glass rounded-3xl p-12">
+                    <h3 class="text-2xl mb-8 text-center">Startaplar muvaffaqiyat darajasi</h3>
+                    <canvas id="outcomeChart" class="max-w-xs mx-auto"></canvas>
+                    <div class="flex justify-center gap-8 mt-8 text-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-emerald-500 rounded"></div>
+                            <span>Muvaffaqiyatli (18%)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-red-500 rounded"></div>
+                            <span>Muvaffaqiyatsiz (82%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-3xl p-12">
+                    <h3 class="text-2xl mb-8 text-center">Bosqich bo‘yicha o‘rtacha daromad</h3>
+                    <canvas id="revenueChart" class="h-80"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real daromad -->
+    <section id="income" class="py-24 bg-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <h2 class="title-font text-5xl text-center mb-16">Real startap daromadlari (yillik)</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass rounded-3xl p-10 text-center card-hover">
+                    <h4 class="text-xl mb-4">Kichik startap</h4>
+                    <div id="small" class="counter text-emerald-400">0</div>
+                    <p class="text-sm text-zinc-400 mt-2">$ yillik daromad</p>
+                </div>
+                <div class="glass rounded-3xl p-10 text-center card-hover ring-2 ring-cyan-400">
+                    <h4 class="text-xl mb-4">O‘rta startap</h4>
+                    <div id="medium" class="counter text-cyan-400">0</div>
+                    <p class="text-sm text-zinc-400 mt-2">$ yillik daromad</p>
+                </div>
+                <div class="glass rounded-3xl p-10 text-center card-hover">
+                    <h4 class="text-xl mb-4">Katta startap (Unicorn)</h4>
+                    <div id="big" class="counter text-violet-400">0</div>
+                    <p class="text-sm text-zinc-400 mt-2">$ yillik daromad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yo‘l xaritasi -->
+    <section id="roadmap" class="py-24">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <h2 class="title-font text-5xl text-center mb-16">Startap yo‘l xaritasi (5 bosqich)</h2>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-5 gap-10 relative">
+                <div class="hidden md:block absolute top-20 left-1/2 h-0.5 w-full bg-gradient-to-r from-cyan-400 via-violet-400 to-cyan-400 -translate-x-1/2"></div>
+                
+                <div class="text-center relative z-10">
+                    <div class="mx-auto w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg">1</div>
+                    <h5 class="mt-6 font-semibold text-lg">G‘oya</h5>
+                    <p class="text-sm text-zinc-400 mt-2">Muammoni toping va mijozlar bilan gaplashing</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <div class="mx-auto w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg">2</div>
+                    <h5 class="mt-6 font-semibold text-lg">MVP</h5>
+                    <p class="text-sm text-zinc-400 mt-2">Eng sodda ishlaydigan versiyani yarating</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <div class="mx-auto w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg">3</div>
+                    <h5 class="mt-6 font-semibold text-lg">Birinchi mijozlar</h5>
+                    <p class="text-sm text-zinc-400 mt-2">100 ta haqiqiy foydalanuvchi toping</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <div class="mx-auto w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg">4</div>
+                    <h5 class="mt-6 font-semibold text-lg">O‘sish</h5>
+                    <p class="text-sm text-zinc-400 mt-2">Marketing va mahsulotni rivojlantiring</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <div class="mx-auto w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg">5</div>
+                    <h5 class="mt-6 font-semibold text-lg">Foyda / Exit</h5>
+                    <p class="text-sm text-zinc-400 mt-2">Daromad oling yoki kompaniyani soting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-20 text-center border-t border-white/10">
+        <p class="text-zinc-400">© 2026 StartupForge — O‘zbekiston yosh tadbirkorlari uchun</p>
+    </footer>
+
+    <!-- PROJECT MODAL -->
+    <div id="projectModal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-[100]">
+        <div class="glass rounded-3xl p-10 max-w-2xl w-full mx-4 modal max-h-[95vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-8 sticky top-0 bg-zinc-950/90 backdrop-blur-md py-4 z-10 border-b border-white/10">
+                <h2 class="title-font text-3xl font-bold">Yangi loyiha joylashtirish</h2>
+                <button onclick="closeProjectModal()" class="text-4xl text-zinc-400 hover:text-white">×</button>
+            </div>
+           
+            <form id="projectForm" onsubmit="submitProject(event)">
+                <div class="space-y-8">
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2">Loyiha rasmi (logo yoki banner)</label>
+                        <div class="border-2 border-dashed border-white/30 rounded-3xl p-8 text-center hover:border-cyan-400 transition-all">
+                            <input type="file" id="projectImage" accept="image/*" class="hidden" onchange="previewImage(this)">
+                            <div id="imagePreviewContainer" class="hidden mb-4">
+                                <img id="imagePreview" class="mx-auto max-h-52 rounded-2xl object-cover shadow-lg" alt="Preview">
+                            </div>
+                            <button type="button" onclick="document.getElementById('projectImage').click()" 
+                                    class="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-2xl text-sm font-medium flex items-center gap-2 mx-auto">
+                                📸 Rasm tanlash
+                            </button>
+                            <p class="text-xs text-zinc-500 mt-3">JPG, PNG, WebP • Maks. 5MB</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2">Loyiha videosi (ixtiyoriy)</label>
+                        <div class="border-2 border-dashed border-white/30 rounded-3xl p-8 text-center hover:border-violet-400 transition-all">
+                            <input type="file" id="projectVideo" accept="video/mp4,video/webm" class="hidden" onchange="previewVideo(this)">
+                            <div id="videoPreviewContainer" class="hidden mb-4">
+                                <video id="videoPreview" class="w-full rounded-2xl shadow-lg" controls></video>
+                            </div>
+                            <button type="button" onclick="document.getElementById('projectVideo').click()" 
+                                    class="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-2xl text-sm font-medium flex items-center gap-2 mx-auto">
+                                🎥 Video tanlash (MP4, WebM • max 50MB)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm text-zinc-400 mb-2">Loyiha nomi</label>
+                            <input type="text" id="projectName" required 
+                                   class="w-full bg-zinc-900 border border-white/20 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400 text-lg"
+                                   placeholder="Masalan: AI o‘zbek tilidagi yozuvchi">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-zinc-400 mb-2">Kerakli sarmoya</label>
+                            <input type="text" id="projectInvestment" 
+                                   class="w-full bg-zinc-900 border border-white/20 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"
+                                   placeholder="$15,000 yoki $50,000">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2">Qisqa tavsif</label>
+                        <textarea id="projectDesc" rows="4" required
+                                  class="w-full bg-zinc-900 border border-white/20 rounded-3xl px-6 py-4 focus:outline-none focus:border-cyan-400"
+                                  placeholder="Loyihangiz nima muammoni hal qiladi?"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2">Kategoriya</label>
+                        <select id="projectCategory" required
+                                class="w-full bg-zinc-900 border border-white/20 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400">
+                            <option value="">Tanlang</option>
+                            <option value="AI">Sun'iy Intellekt (AI)</option>
+                            <option value="FinTech">FinTech</option>
+                            <option value="EdTech">Ta'lim (EdTech)</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="Health">Salomatlik</option>
+                            <option value="Video">Video / Kontent</option>
+                            <option value="Other">Boshqa</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 mt-12">
+                    <button type="button" onclick="closeProjectModal()" 
+                            class="flex-1 py-4 rounded-3xl border border-white/20 hover:bg-white/10 transition">Bekor qilish</button>
+                    <button type="submit"
+                            class="flex-1 py-4 bg-gradient-to-r from-cyan-400 to-violet-500 hover:from-cyan-500 hover:to-violet-600 rounded-3xl font-semibold transition-all">
+                        🚀 Loyihani joylashtirish
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="fixed inset-0 bg-black/90 hidden flex items-center justify-center z-[110]">
+        <div class="text-center relative">
+            <div id="rocket" class="text-9xl mx-auto mb-10 rocket-launch">🚀</div>
+            <div class="glass rounded-3xl p-12 max-w-md mx-auto">
+                <h2 class="text-4xl font-bold mb-3 title-font">Muvaffaqiyatli joylashtirildi!</h2>
+                <p class="text-zinc-400 text-lg" id="successProjectName"></p>
+                <button onclick="closeSuccessModal()" 
+                        class="mt-10 px-12 py-4 bg-white text-black rounded-3xl font-semibold hover:bg-cyan-400 hover:text-white transition-all">
+                    Yopish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentImageBase64 = null;
+        let currentVideoBase64 = null;
+
+        function openProjectModal() {
+            document.getElementById('projectModal').classList.remove('hidden');
+            document.getElementById('projectModal').classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            resetForm();
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function resetForm() {
+            document.getElementById('projectForm').reset();
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('videoPreviewContainer').classList.add('hidden');
+            currentImageBase64 = null;
+            currentVideoBase64 = null;
+        }
+
+        function previewImage(input) {
+            if (!input.files[0]) return;
+            if (input.files[0].size > 5*1024*1024) return alert("Rasm hajmi 5MB dan oshmasligi kerak!");
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('imagePreview').src = e.target.result;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                currentImageBase64 = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function previewVideo(input) {
+            if (!input.files[0]) return;
+            if (input.files[0].size > 50*1024*1024) return alert("Video hajmi 50MB dan oshmasligi kerak!");
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('videoPreview').src = e.target.result;
+                document.getElementById('videoPreviewContainer').classList.remove('hidden');
+                currentVideoBase64 = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function submitProject(e) {
+            e.preventDefault();
+           
+            const name = document.getElementById('projectName').value.trim();
+            const desc = document.getElementById('projectDesc').value.trim();
+            const category = document.getElementById('projectCategory').value;
+            const investment = document.getElementById('projectInvestment').value.trim() || "Belgilanmagan";
+
+            if (!name || !desc || !category) {
+                return alert("Iltimos, barcha majburiy maydonlarni to‘ldiring!");
+            }
+            
+            let projects = JSON.parse(localStorage.getItem('startupProjects')) || [];
+            
+            projects.unshift({
+                id: Date.now(),
+                name: name,
+                description: desc,
+                category: category,
+                investment: investment,
+                image: currentImageBase64,
+                video: currentVideoBase64,
+                date: new Date().toLocaleDateString('uz-UZ')
+            });
+            
+            localStorage.setItem('startupProjects', JSON.stringify(projects));
+            
+            document.getElementById('successProjectName').textContent = `"${name}" loyihasi muvaffaqiyatli joylashtirildi!`;
+            const successModal = document.getElementById('successModal');
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+
+            const rocket = document.getElementById('rocket');
+            rocket.style.animation = 'none';
+            setTimeout(() => { rocket.style.animation = 'rocketLaunch 2.8s ease forwards'; }, 50);
+
+            closeProjectModal();
+            renderProjects();
+            renderVideos();
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            const noProjects = document.getElementById('noProjects');
+            let projects = JSON.parse(localStorage.getItem('startupProjects')) || [];
+
+            container.innerHTML = '';
+
+            if (projects.length === 0) {
+                noProjects.classList.remove('hidden');
+                return;
+            }
+            noProjects.classList.add('hidden');
+
+            projects.forEach(project => {
+                const cardHTML = `
+                    <div class="glass rounded-3xl overflow-hidden card-hover group">
+                        ${project.image ? 
+                            `<img src="${project.image}" class="w-full h-56 object-cover" alt="${project.name}">` : 
+                            `<div class="w-full h-56 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center text-7xl">🚀</div>`
+                        }
+                        ${project.video ? `
+                            <div class="p-4 bg-black">
+                                <video class="w-full rounded-2xl" controls>
+                                    <source src="${project.video}" type="video/mp4">
+                                </video>
+                            </div>
+                        ` : ''}
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="px-4 py-1 text-xs font-medium rounded-2xl bg-cyan-400/10 text-cyan-400">${project.category}</span>
+                                <span class="text-xs text-zinc-500">${project.date}</span>
+                            </div>
+                            <h3 class="title-font text-2xl font-semibold mb-2 line-clamp-2">${project.name}</h3>
+                            <p class="text-zinc-400 text-sm line-clamp-3 mb-4">${project.description}</p>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs text-zinc-500">Sarmoya</span>
+                                    <p class="font-semibold text-emerald-400">${project.investment}</p>
+                                </div>
+                                <button onclick="deleteProject(${project.id})" class="text-red-400 hover:text-red-500 text-sm font-medium transition">O‘chirish</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // 6 ta sifatli startap videosi
+        function renderVideos() {
+            const container = document.getElementById('videosContainer');
+            container.innerHTML = '';
+
+            const videos = [
+                {
+                    title: "Startap nima? Steve Blank tushuntirishi",
+                    description: "Startap va oddiy biznes o‘rtasidagi asosiy farqlar haqida klassik ma’ruza",
+                    thumbnail: "https://img.youtube.com/vi/1RTcXwJuCaU/maxresdefault.jpg",
+                    videoUrl: "https://www.youtube.com/embed/1RTcXwJuCaU",
+                    duration: "58:29"
+                },
+                {
+                    title: "O‘zbekistonda startap qanday boshlash mumkin?",
+                    description: "O‘zbek yosh tadbirkorlari uchun real maslahatlar va tajribalar",
+                    thumbnail: "https://img.youtube.com/vi/Y3MZQTZrBCw/maxresdefault.jpg",
+                    videoUrl: "https://www.youtube.com/embed/Y3MZQTZrBCw",
+                    duration: "45:12"
+                },
+                {
+                    title: "MVP yaratishning eng muhim qoidalari",
+                    description: "Eng sodda ishlaydigan mahsulotni qanday tez va arzon yaratish mumkin?",
+                    thumbnail: "https://img.youtube.com/vi/Pydut1BMlBw/maxresdefault.jpg",
+                    videoUrl: "https://www.youtube.com/embed/Pydut1BMlBw",
+                    duration: "22:15"
+                },
+                {
+                    title: "Investordan pul olish va Pitch Deck tayyorlash",
+                    description: "Investorlar nima izlaydi? Muvaffaqiyatli pitch misollari",
+                    thumbnail: "https://img.youtube.com/vi/vv1WdzU7yk0/maxresdefault.jpg",
+                    videoUrl: "https://www.youtube.com/embed/vv1WdzU7yk0",
+                    duration: "31:40"
+                },
+                {
+                    title: "2026-yilda startap qurishning 10 ta muhim darsi",
+                    description: "Ash Maurya va zamonaviy tajribalar asosida amaliy maslahatlar",
+                    thumbnail: "https://img.youtube.com/vi/Pydut1BMlBw/maxresdefault.jpg",
+                    videoUrl: "https://www.youtube.com/embed/Pydut1BMlBw",
+                    duration: "28:50"
+                },
+                {
+                    title: "Muvaffaqiyatli O‘zbek startaplari hikoyalari",
+                    description: "Payme, Click, Uzum va boshqa real muvaffaqiyat misollari",
+                    thumbnail: "https://img.youtube.com/vi/HfT09DfggyA/maxresdefault.jpg",
+                    videoUrl: "https://www.youtube.com/embed/HfT09DfggyA",
+                    duration: "35:20"
+                }
+            ];
+
+            videos.forEach(video => {
+                const html = `
+                    <div class="glass rounded-3xl overflow-hidden card-hover group">
+                        <div class="relative">
+                            <img src="${video.thumbnail}" 
+                                 class="w-full h-52 object-cover" 
+                                 alt="${video.title}">
+                            <div class="absolute bottom-3 right-3 bg-black/80 text-white text-xs px-3 py-1 rounded-xl font-mono tracking-tight">
+                                ${video.duration}
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="title-font text-xl font-semibold leading-tight mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                                ${video.title}
+                            </h3>
+                            <p class="text-zinc-400 text-sm line-clamp-3 mb-5">
+                                ${video.description}
+                            </p>
+                            <a href="${video.videoUrl}" target="_blank" 
+                               class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition">
+                                ▶️ Videoni to‘liq ko‘rish
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function deleteProject(id) {
+            if (!confirm("Bu loyihani rostdan ham o‘chirmoqchimisiz?")) return;
+            let projects = JSON.parse(localStorage.getItem('startupProjects')) || [];
+            projects = projects.filter(p => p.id !== id);
+            localStorage.setItem('startupProjects', JSON.stringify(projects));
+            renderProjects();
+            renderVideos();
+        }
+
+        // Sahifa yuklanganda
+        window.onload = () => {
+            // Chartlar
+            new Chart(document.getElementById('outcomeChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Muvaffaqiyatli', 'Muvaffaqiyatsiz'],
+                    datasets: [{ data: [18, 82], backgroundColor: ['#10b981', '#ef4444'] }]
+                },
+                options: { cutout: '75%', plugins: { legend: { display: false } } }
+            });
+
+            new Chart(document.getElementById('revenueChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['MVP', 'Birinchi mijozlar', 'O‘sish', 'Katta bosqich'],
+                    datasets: [{ 
+                        label: 'O‘rtacha daromad ($)', 
+                        data: [45000, 450000, 2800000, 22000000], 
+                        backgroundColor: '#22d3ee' 
+                    }]
+                },
+                options: { 
+                    responsive: true, 
+                    scales: { y: { beginAtZero: true } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Counter animatsiyasi
+            setTimeout(() => {
+                animateCounter('small', 120000);
+                animateCounter('medium', 2500000);
+                animateCounter('big', 45000000);
+            }, 800);
+
+            renderProjects();
+            renderVideos();
+
+            console.log('%c✅ StartupForge — Mukammal versiya ishga tushdi! (6 ta sifatli video bilan)', 'color:#22d3ee; font-size:16px');
+        };
+
+        function animateCounter(id, target, duration = 2000) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    start = target;
+                    clearInterval(timer);
+                }
+                el.textContent = Math.floor(start).toLocaleString('en-US');
+            }, 16);
+        }
+    </script>
+</body>
+</html>
